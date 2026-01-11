@@ -22,7 +22,16 @@ app.put("users", (req, res) => {
 //app.patch updates the database partially
 app.patch("user", (req, res) => {
   const { body, params:{id} } = req;
-  
+  const parsedId = parseInt(id);
+  if(isNaN) {
+    return res.sendStatus(400);
+  };
+  const foundUserIndex = users.find(user => user.id === id)
+  if(foundUserIndex === -1) {
+    return res.sendStatus(400);
+  };
+  users[foundUserIndex] = { ...users[foundUserIndex], ...body };
+  return res.sendStatus(200);
 });
 
 const port = process.env.PORT || 3000;
